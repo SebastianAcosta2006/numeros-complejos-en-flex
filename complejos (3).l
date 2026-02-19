@@ -1,18 +1,13 @@
 %{
 #include <stdio.h>
 %}
-
-/* Número real simple (enteros o decimales con signo opcional) */
-REAL   [+-]?[0-9]+(\.[0-9]+)?
-IMAG   [iIjJ]
-
+/* numero real simple enteros o decmales */
+real   [+-]?[0-9]+(\.[0-9]+)?
+imag   [iIjJ]
 %%
-
-^{REAL}[+-]{REAL}{IMAG}$   { printf("ACEPTA\n"); }
-.*                         { printf("NO ACEPTA\n"); }
-
+^{real}[+-]{real}{imag}$   { printf("acepta\n"); }
+.*                         { printf("no acepta\n"); }
 %%
-
 int yywrap() {
     return 1;
 }
