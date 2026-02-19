@@ -1,11 +1,16 @@
 %{
 #include <stdio.h>
 %}
-/* numero real simple enteros o decmales */
-real   [+-]?[0-9]+(\.[0-9]+)?
-imag   [iIjJ]
+digit        [0-9]
+entero       {digit}+
+decimal      ({digit}+\.{digit}*|\.{digit}+)
+exp          [eE][+-]?{digit}+
+real         [+-]?({entero}|{decimal})({exp})?
+imag         {real}?[iIjJ]
 %%
-^{real}[+-]{real}{imag}$   { printf("acepta\n"); }
+^{real}[+-]{real}[iIjJ]$   { printf("acepta (complejo)\n"); }
+^{real}$                   { printf("acepta (real)\n"); }
+^{imag}$                   { printf("acepta (imaginario)\n"); }
 .*                         { printf("no acepta\n"); }
 %%
 int yywrap() {
